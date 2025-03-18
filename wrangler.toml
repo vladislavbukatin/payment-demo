@@ -1,4 +1,4 @@
-name = "payment-worker"
-account_id = "YOUR_CLOUDFLARE_ACCOUNT_ID"
+name = 'flat-sea-d14b'
+account_id = "857c45f124a93355dfb4071cb5ccd11f"
 workers_dev = true
 main = "index.js"
