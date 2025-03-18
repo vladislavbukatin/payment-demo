@@ -8,17 +8,22 @@ import {
   Checkbox,
   Typography,
 } from "@mui/material";
-import { CardBack, CardFront, CardStripe, CardWrapper } from "./styled";
+import { CardBack, CardFront, CardStripe, CardWrapper, PaymentAmount } from "./styled";
 
 const CardDetailsForm = () => {
   return (
     <Box>
+      <PaymentAmount>
+        <Typography>Payment Amount</Typography>
+        <Typography>$1,000.00</Typography>
+      </PaymentAmount>
       <CardWrapper>
         <CardFront>
           <Grid2 container spacing={2}>
             <Grid2 size={12}>
               <TextField
                 fullWidth
+                required
                 label="Card Number"
                 placeholder="5559 0000 0000 0000"
                 margin="normal"
@@ -32,6 +37,7 @@ const CardDetailsForm = () => {
             <Grid2 size={6}>
               <TextField
                 fullWidth
+                required
                 label="Cardholder Name"
                 placeholder="SAM SMITH"
                 margin="normal"
@@ -40,6 +46,7 @@ const CardDetailsForm = () => {
             <Grid2 size={3}>
               <TextField
                 fullWidth
+                required
                 label="MM"
                 placeholder="MM"
                 margin="normal"
@@ -48,6 +55,7 @@ const CardDetailsForm = () => {
             <Grid2 size={3}>
               <TextField
                 fullWidth
+                required
                 label="YY"
                 placeholder="YY"
                 margin="normal"
@@ -67,6 +75,7 @@ const CardDetailsForm = () => {
             <Grid2 size={6}>
               <TextField
                 size="small"
+                required
                 label="CVV"
                 placeholder="***"
                 margin="normal"

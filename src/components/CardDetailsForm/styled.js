@@ -12,6 +12,18 @@ export const CardWrapper = styled("div")(() => ({
   }
 }));
 
+export const PaymentAmount = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "10px 15px",
+  minHeight: "50px",
+  borderRadius: "12px",
+  backgroundColor: CARD_BACKGROUND_COLOR,
+  marginBottom: '30px'
+}));
+
 export const CardFront = styled("div")(() => ({
   display: "flex",
   flexDirection: "row",
@@ -42,9 +54,9 @@ export const CardBack = styled("div")(() => ({
   width: "95%",
   marginLeft: "5%",
   alignItems: "center",
-  marginTop: "5px",
   backgroundColor: CARD_BACKGROUND_COLOR,
   marginTop: "-100px",
+  marginBottom: "20px",
   padding: "20px 10px 10px 10px",
   borderRadius: "12px",
   "& .MuiGrid2-container": {
@@ -62,7 +74,7 @@ export const CardBack = styled("div")(() => ({
       alignItems: "center",
       flexDirection: "row",
       "& .MuiFormControl-root": {
-        maxWidth: "65px",
+        maxWidth: "75px",
       },
     },
     "& .save-card": {
