@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Typography, Button, Checkbox, Container } from "@mui/material";
-import { PaymentBox } from "./styled";
+import { Box, Typography, Button, Checkbox } from "@mui/material";
+import { Container, PaymentBox } from "./styled";
 import CardDetailsForm from "../CardDetailsForm";
 
 const PaymentForm = () => {

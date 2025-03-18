@@ -66,7 +66,7 @@ const CardDetailsForm = () => {
             </Grid2>
             <Grid2 size={6}>
               <TextField
-                fullWidth
+                size="small"
                 label="CVV"
                 placeholder="***"
                 margin="normal"
