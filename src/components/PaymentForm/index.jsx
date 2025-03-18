@@ -1,26 +1,7 @@
 import React from "react";
-import { Box, Typography, Button, Checkbox } from "@mui/material";
-import { styled } from "styled-components";
-import CardDetailsForm from "./CardDetailsForm";
-
-const Container = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f8f9fa;
-  padding: 20px;
-`;
-
-const PaymentBox = styled(Box)`
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
-`;
+import { Box, Typography, Button, Checkbox, Container } from "@mui/material";
+import { PaymentBox } from "./styled";
+import CardDetailsForm from "../CardDetailsForm";
 
 const PaymentForm = () => {
   return (

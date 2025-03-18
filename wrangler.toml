@@ -1,5 +1,8 @@
-name = 'flat-sea-d14b'
+name = "flat-sea-d14b"
 account_id = "857c45f124a93355dfb4071cb5ccd11f"
 workers_dev = true
 main = "index.js"
 compatibility_date = "2025-03-18"
+
+[dev]
+port = 8787

@@ -1,2 +1,4 @@
 node_modules
 dist
+eslint.config.mjs
+.eslintrc.json
