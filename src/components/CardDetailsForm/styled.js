@@ -1,0 +1,73 @@
+import styled from "styled-components";
+
+const CARD_BACKGROUND_COLOR = "#f5f5f5";
+
+export const CardWrapper = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "20px",
+}));
+
+export const CardFront = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  marginTop: "10px",
+  backgroundColor: CARD_BACKGROUND_COLOR,
+  padding: "20px",
+  width: "95%",
+  marginRight: "5%",
+  borderRadius: "12px",
+  border: '2px solid #ffffff',
+  zIndex: 2,
+}));
+
+export const CardStripe = styled("div")(() => ({
+  width: "100%",
+  height: "50px",
+  backgroundColor: "#2c2c2c",
+  zIndex: 1,
+  marginBottom: '30px',
+  marginRight: '-40px'
+}));
+
+export const CardBack = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  zIndex: 1,
+  width: "95%",
+  marginLeft: "5%",
+  alignItems: "center",
+  marginTop: "5px",
+  backgroundColor: CARD_BACKGROUND_COLOR,
+  marginTop: "-100px",
+  padding: "20px 20px 20px 20px",
+  borderRadius: "12px",
+  "& .MuiGrid2-container": {
+    width: "100%",
+    minHeight: "50px",
+    "& .MuiGrid2-root:first-child": {
+      justifyContent: "flex-start",
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "row",
+    },
+    "& .MuiGrid2-root:last-child": {
+      justifyContent: "flex-end",
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "row",
+      "& .MuiFormControl-root": {
+        maxWidth: "100px",
+      },
+    },
+    "& .save-card": {
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "row",
+    },
+  },
+}));

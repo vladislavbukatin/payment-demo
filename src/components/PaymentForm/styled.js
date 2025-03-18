@@ -16,6 +16,7 @@ export const PaymentBox = styled(Box)`
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  max-width: 600px;
   width: 100%;
+  min-width: 400px;
 `;
