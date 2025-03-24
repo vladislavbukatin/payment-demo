@@ -8,7 +8,8 @@ export const CardWrapper = styled("div")(() => ({
   alignItems: "center",
   padding: "10px",
   '& .MuiInputBase-root': {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    borderRadius: '8px'
   }
 }));
 
