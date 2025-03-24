@@ -16,7 +16,14 @@ const CURRENCY = "USD";
 const API_BASE_URL = "https://getcryptofast.com";
 
 const PaymentForm = () => {
-  const [paymentData, setPaymentData] = useState({});
+  const [paymentData, setPaymentData] = useState({
+    cardHolder: "",
+    cardNumber: "",
+    expiryMonth: "",
+    expiryYear: "",
+    cvv: "",
+    email: "",
+  });
   const [ddcUrl, setDdcUrl] = useState(null);
   const [challengeUrl, setChallengeUrl] = useState(null);
   const [transactionReference, setTransactionReference] = useState(null);
@@ -45,7 +52,7 @@ const PaymentForm = () => {
         customer: CUSTOMER_ID,
         amount: PAYMENT_AMOUNT,
         currency: CURRENCY,
-        cardholder: paymentData.cardholder,
+        cardholder: paymentData.cardHolder,
         cc: paymentData.cardNumber.replace(/\D/g, ""),
         expmo: paymentData.expiryMonth,
         expyr: paymentData.expiryYear,
@@ -55,7 +62,7 @@ const PaymentForm = () => {
         customeremail: paymentData.email,
       };
 
-      const response = await axios.post(`${API_BASE_URL}/wp3dsinit`, payload, {
+      const response = await axios.post(`/api/wp3dsinit`, payload, {
         headers: { "Content-Type": "application/json" },
         timeout: 10000,
       });
@@ -63,7 +70,7 @@ const PaymentForm = () => {
       const result = response.data;
       if (result.deviceDataCollection) {
         setTransactionReference(result.transactionReference);
-        setDdcUrl(`${API_BASE_URL}/wp3dsddc?url=${encodeURIComponent(result.deviceDataCollection.url)}&bin=${result.deviceDataCollection.bin}&jwt=${result.deviceDataCollection.jwt}`);
+        setDdcUrl(`/api/wp3dsddc?url=${encodeURIComponent(result.deviceDataCollection.url)}&bin=${result.deviceDataCollection.bin}&jwt=${result.deviceDataCollection.jwt}`);
       }
     } catch (error) {
       console.error("Error initializing payment:", error);
@@ -72,7 +79,7 @@ const PaymentForm = () => {
 
   const authenticate3DS = async (sessionId) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/wp3dsauth`, {
+      const response = await axios.post(`/api/wp3dsauth`, {
         refid: transactionReference,
         colref: sessionId,
         customer: CUSTOMER_ID,
@@ -93,7 +100,7 @@ const PaymentForm = () => {
 
   const verify3DS = async () => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/wp3dsverify`, {
+      const response = await axios.post(`/api/wp3dsverify`, {
         refid: transactionReference,
         challengeref: challengeRef,
         customer: CUSTOMER_ID,
@@ -111,7 +118,7 @@ const PaymentForm = () => {
 
   const finalizePayment = async () => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/wppay`, {
+      const response = await axios.post(`/api/wppay`, {
         customer: CUSTOMER_ID,
         amount: PAYMENT_AMOUNT,
         currency: CURRENCY,
