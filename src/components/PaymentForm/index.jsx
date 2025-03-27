@@ -23,7 +23,7 @@ const ORDER_ID = "ORDER_ID";
 const PAYMENT_AMOUNT = "1";
 const CURRENCY = "USD";
 
-const API_BASE_URL = import.meta.env.MODE === "development" ? "/api" : "https://payment-demo-proxy.vladbukatin76.workers.dev";//remove cors anywhere after deployment
+const API_BASE_URL = import.meta.env.MODE === "development" ? "/api" : "https://getcryptofast.com";//remove cors anywhere after deployment
 
 const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
   const [paymentData, setPaymentData] = useState({
@@ -117,9 +117,10 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         customeremail: paymentData.email,
       };
 
-      console.log("Initializing Payment:", payload);
-      const response = await axios.post(`${API_BASE_URL}/wp3dsinit`, payload);
-      console.log("Payment initialized:", response.data);
+      const response = await axios.post(`${API_BASE_URL}/wp3dsinit`, payload, {
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+      });
 
       if (response.data.transactionReference) {
         setTransactionReference(response.data.transactionReference);
@@ -165,7 +166,10 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
           refid: transactionReference,
         };
 
-        const response = await axios.post(`${API_BASE_URL}/wp3dsauth`, payload);
+        const response = await axios.post(`${API_BASE_URL}/wp3dsauth`, payload, {
+          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+        });
 
         if (response.data.url) {
           setChallengeRef(response.data.reference);
@@ -197,7 +201,10 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         customer: CUSTOMER_ID,
       };
 
-      const response = await axios.post(`${API_BASE_URL}/wp3dsverify`, payload);
+      const response = await axios.post(`${API_BASE_URL}/wp3dsverify`, payload, {
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+      });
 
       if (response.data.outcome === "authenticated") {
         await finalizePayment(response.data.authentication);
@@ -236,7 +243,10 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
           ...(auth3ds ? { auth3ds } : {}),
         };
 
-        const response = await axios.post(`${API_BASE_URL}/wppay`, payload);
+        const response = await axios.post(`${API_BASE_URL}/wppay`, payload, {
+          headers: { "Content-Type": "application/json" },
+          mode: "cors",
+        });
 
         if (response) {
           handleOpenModal("Payment successful! Thank you.", true);
