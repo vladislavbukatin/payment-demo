@@ -23,7 +23,7 @@ const ORDER_ID = "ORDER_ID";
 const PAYMENT_AMOUNT = "1";
 const CURRENCY = "USD";
 
-const API_BASE_URL = import.meta.env.MODE === "development" ? "/api" : "https://cors-anywhere.herokuapp.com/https://getcryptofast.com";//remove cors anywhere after deployment
+const API_BASE_URL = import.meta.env.MODE === "development" ? "/api" : "https://payment-demo-proxy.vladbukatin76.workers.dev";//remove cors anywhere after deployment
 
 const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
   const [paymentData, setPaymentData] = useState({
