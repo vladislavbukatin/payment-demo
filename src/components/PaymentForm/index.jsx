@@ -23,7 +23,8 @@ const ORDER_ID = "ORDER_ID";
 const PAYMENT_AMOUNT = "1";
 const CURRENCY = "USD";
 
-const API_BASE_URL = import.meta.env.MODE === "development" ? "/api" : "https://getcryptofast.com";//remove cors anywhere after deployment
+const ORIGINAL_BASE_URL = "https://getcryptofast.com";
+const API_BASE_URL = `https://cors-anywhere.herokuapp.com/${ORIGINAL_BASE_URL}`;//remove cors anywhere after deployment
 
 const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
   const [paymentData, setPaymentData] = useState({
@@ -125,7 +126,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
       if (response.data.transactionReference) {
         setTransactionReference(response.data.transactionReference);
         setDdcUrl(
-          `${API_BASE_URL}/wp3dsddc?url=${encodeURIComponent(
+          `${ORIGINAL_BASE_URL}/wp3dsddc?url=${encodeURIComponent(
             response.data.deviceDataCollection.url
           )}&bin=${response.data.deviceDataCollection.bin}&jwt=${
             response.data.deviceDataCollection.jwt
@@ -174,7 +175,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         if (response.data.url) {
           setChallengeRef(response.data.reference);
           setChallengeUrl(
-            `${API_BASE_URL}/wp3dschallengeform?url=${encodeURIComponent(
+            `${ORIGINAL_BASE_URL}/wp3dschallengeform?url=${encodeURIComponent(
               response.data.url
             )}&jwt=${response.data.jwt}&md=${response.data.md}`
           );
