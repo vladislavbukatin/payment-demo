@@ -77,7 +77,7 @@ const CardDetailsForm = ({
       </PaymentAmount>
       <CardWrapper>
       <Typography variant="subtitle1" sx={{ width: "100%", mb: 1 }}>Card Details</Typography>
-        <Grid container columnSpacing={isMobile ? 0 : 2} rowSpacing={isMobile ? 0 : 2}>
+        <Grid container columnSpacing={isMobile ? 0 : 2} >
           <Grid size={12}>
             <TextField
               fullWidth
@@ -141,7 +141,7 @@ const CardDetailsForm = ({
               margin="normal"
             />
           </Grid>
-          <Grid size={isMobile ? 6 : 2.5} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end"}}>
+          <Grid size={isMobile ? 6 : 2.5} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
             <TextField
               className="cvv"
               required
