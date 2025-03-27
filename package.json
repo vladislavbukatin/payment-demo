@@ -7,7 +7,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.4.8",
+    "@fontsource/space-grotesk": "^5.2.6",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.8.4",
     "styled-components": "^6.1.16",
