@@ -67,7 +67,7 @@ const CardDetailsForm = ({
     setPaymentData({ ...paymentData, email: e.target.value });
   };
 
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:500px)");
 
   return (
     <Box>
@@ -77,7 +77,7 @@ const CardDetailsForm = ({
       </PaymentAmount>
       <CardWrapper>
       <Typography variant="subtitle1" sx={{ width: "100%", mb: 1 }}>Card Details</Typography>
-        <Grid container spacing={1}>
+        <Grid container columnSpacing={isMobile ? 0 : 2} rowSpacing={isMobile ? 0 : 2}>
           <Grid size={12}>
             <TextField
               fullWidth
@@ -141,7 +141,7 @@ const CardDetailsForm = ({
               margin="normal"
             />
           </Grid>
-          <Grid size={isMobile ? 6 : 2.5}>
+          <Grid size={2.5} offset={isMobile ? 2.5 : 0}>
             <TextField
               className="cvv"
               required

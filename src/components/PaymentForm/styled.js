@@ -7,6 +7,7 @@ export const Container = styled("div")(() => ({
   alignItems: "center",
   justifyContent: "center",
   height: "100%",
+  minHeight: "90vh",
   padding: "20px",
 }));
 

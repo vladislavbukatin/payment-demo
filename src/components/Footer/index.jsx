@@ -2,7 +2,7 @@ import { Box, Typography, Link } from "@mui/material";
 
 const Footer = () => {
   return (
-    <Box sx={{ textAlign: "center", py: 2, borderTop: "1px solid #ccc", mt: 3 }}>
+    <Box sx={{ width: "100%", textAlign: "center", py: 2, borderTop: "1px solid #ccc", mt: 3 }}>
       <Typography variant="body2" color="textSecondary">
         © {new Date().getFullYear()} TransCrypter. All rights reserved.
       </Typography>
