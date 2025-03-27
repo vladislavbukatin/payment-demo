@@ -141,7 +141,7 @@ const CardDetailsForm = ({
               margin="normal"
             />
           </Grid>
-          <Grid size={2.5} offset={isMobile ? 2.5 : 0}>
+          <Grid size={isMobile ? 6 : 2.5} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end"}}>
             <TextField
               className="cvv"
               required
