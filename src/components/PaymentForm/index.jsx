@@ -16,6 +16,7 @@ import CardDetailsForm from "../CardDetailsForm";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import lightLogo from "../../../assets/logo-light.svg";
 import darkLogo from "../../../assets/logo-dark.svg";
+import logError from "../logger";
 
 const CUSTOMER_ID = "502N12P6";
 const API_KEY = "b7691ebb-2ba8-469a-abb2-bfb469f23aac";
@@ -133,6 +134,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         );
       }
     } catch (error) {
+      logError("Error initializing payment", error);
       handleOpenModal("Payment initialization failed. Please try again.");
     }
   }, [paymentData]);
@@ -182,6 +184,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
           await finalizePayment(response.data);
         }
       } catch (error) {
+        logError("Error authenticating 3DS", error);
         handleOpenModal("3DS Authentication failed. Please try again.");
       }
     },
@@ -210,6 +213,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         await finalizePayment(response.data.authentication);
       }
     } catch (error) {
+      logError("Error verifying 3DS", error);
       handleOpenModal("3DS Verification failed. Please try again.");
     }
   }, [transactionReference, challengeRef]);
@@ -252,6 +256,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
           handleOpenModal("Payment successful! Thank you.", true);
         }
       } catch (error) {
+        logError("Error finalizing payment", error);
         handleOpenModal("Final payment failed. Please try again.");
       }
     },
