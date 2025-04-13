@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import { darkSecureTheme, lightSecureTheme } from "../utils/theme";
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   return (
     <ThemeProvider theme={isDarkMode ? darkSecureTheme : lightSecureTheme}>

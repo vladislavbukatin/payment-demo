@@ -127,7 +127,7 @@ export const lightSecureTheme = createTheme({
     primary: { main: "#000000" },
     secondary: { main: "#757575" },
     background: {
-      default: "#FAFAFA",
+      default: "#F8F8F8",
       paper: "#FFFFFF",
       card: "#F5F5F5",
       input: "#E0E0E0",

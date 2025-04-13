@@ -326,7 +326,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         {challengeUrl && <FullScreenIframe title="3DS Challenge" src={challengeUrl} />}
       </PaymentBox>
 
-      <Backdrop open={loading} sx={theme => ({ zIndex: 2, color: theme.palette.background.paper })}>
+      <Backdrop open={loading} sx={{ zIndex: 2, color: "#ffffff" }}>
         <CircularProgress size={50} color="inherit" />
       </Backdrop>
 
