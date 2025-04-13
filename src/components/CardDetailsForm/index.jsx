@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   TextField,
   Box,
@@ -6,15 +7,17 @@ import {
   Grid,
   Checkbox,
   Typography,
-  Divider,
-  keyframes,
   useMediaQuery,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
-import { CardWrapper, EmailWrapper, PaymentAmount } from "./styled";
-import { CreditCard } from "@mui/icons-material";
+import { CardWrapper, PaymentAmount } from "./styled";
+import { AttachMoney, CreditCard, EuroSymbol } from "@mui/icons-material";
 
 const CardDetailsForm = ({
-  setPaymentData,
+  setPaymentData, 
   paymentData,
   errors,
   validateField,
@@ -29,6 +32,7 @@ const CardDetailsForm = ({
         formattedValue += " / " + value.slice(2, 4);
       }
     } else {
+      // eslint-disable-next-line no-unused-vars
       formattedValue = value;
     }
 
@@ -63,8 +67,12 @@ const CardDetailsForm = ({
     setPaymentData({ ...paymentData, cardHolder: e.target.value });
   };
 
-  const handleEmailChange = (e) => {
-    setPaymentData({ ...paymentData, email: e.target.value });
+  const handleAmountChange = (e) => {
+    setPaymentData({ ...paymentData, amount: e.target.value });
+  };
+
+  const handleCurrencyChange = (e) => {
+    setPaymentData({ ...paymentData, currency: e.target.value });
   };
 
   const isMobile = useMediaQuery("(max-width:500px)");
@@ -72,8 +80,44 @@ const CardDetailsForm = ({
   return (
     <Box>
       <PaymentAmount>
-        <Typography>Payment Amount</Typography>
-        <Typography>$1.00</Typography>
+        <Grid container columnSpacing={2} width={"100%"}>
+          <Grid item size={8.5}>
+            <TextField
+              fullWidth
+              required
+              type="number"
+              error={!!errors.amount}
+              helperText={errors.amount}
+              onBlur={(e) => validateField("amount", e.target.value)}
+              label="Payment Amount"
+              value={paymentData.amount || ''}
+              onChange={handleAmountChange}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {paymentData.currency === "USD" ? <AttachMoney /> : <EuroSymbol />}
+                    </InputAdornment>
+                  ),
+                }
+              }}
+            />
+          </Grid>
+          <Grid item size={3.5}>
+            <FormControl fullWidth>
+              <InputLabel id="currency-select-label">Currency</InputLabel>
+              <Select
+                labelId="currency-select-label"
+                value={paymentData.currency || 'USD'}
+                label="Currency"
+                onChange={handleCurrencyChange}
+              >
+                <MenuItem value="USD">USD</MenuItem>
+                <MenuItem value="EUR">Euro</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       </PaymentAmount>
       <CardWrapper>
       <Typography variant="subtitle1" sx={{ width: "100%", mb: 1 }}>Card Details</Typography>
@@ -172,26 +216,16 @@ const CardDetailsForm = ({
           </Grid>
         </Grid>
       </CardWrapper>
-      <EmailWrapper>
-        <TextField
-          fullWidth
-          error={!!errors.email}
-          onBlur={(e) => validateField("email", e.target.value)}
-          value={paymentData.email}
-          onChange={handleEmailChange}
-          label="Email"
-          autoComplete="off"
-          helperText={
-            !!errors.email
-              ? errors.email
-              : "Optional field, enter if you want to receive a receipt"
-          }
-          placeholder="Email"
-          margin="normal"
-        />
-      </EmailWrapper>
+
     </Box>
   );
+};
+
+CardDetailsForm.propTypes = {
+  setPaymentData: PropTypes.func.isRequired,
+  paymentData: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  validateField: PropTypes.func.isRequired
 };
 
 export default CardDetailsForm;

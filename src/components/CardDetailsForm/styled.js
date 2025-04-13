@@ -42,7 +42,18 @@ export const PaymentAmount = styled("div")(({ theme }) => ({
   minHeight: "50px",
   borderRadius: "12px",
   backgroundColor: theme.palette.background.default,
-  marginBottom: '20px'
+  marginBottom: '20px',
+  '& input::-webkit-outer-spin-button': {
+    '-webkit-appearance': 'none',
+    margin: 0,
+  },
+  '& input::-webkit-inner-spin-button': {
+    '-webkit-appearance': 'none',
+    margin: 0,
+  },
+  '& input[type=number]': {
+    '-moz-appearance': 'textfield',
+  },
 }));
 
 export const EmailWrapper = styled("div")(({ theme }) => ({

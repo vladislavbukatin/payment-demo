@@ -17,25 +17,24 @@ import { DarkMode, LightMode } from "@mui/icons-material";
 import PropTypes from 'prop-types';
 import lightLogo from "../../../assets/logo-light.svg";
 import darkLogo from "../../../assets/logo-dark.svg";
-import logError from "../logger";
+import logError from "../../utils/logger";
 
 const ORDER_ID = "ORDER_ID";
-const PAYMENT_AMOUNT = "1";
-const CURRENCY = "USD";
 
 
 const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
-  const CUSTOMER_ID = import.meta.env.VITE_CUSTOMER_ID;
-  const API_KEY = import.meta.env.VITE_API_KEY;
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const CUSTOMER_ID = import.meta.env.VITE_CUSTOMER_ID;
+  
   const [paymentData, setPaymentData] = useState({
     cardNumber: "",
     cardHolder: "",
     expiryMonth: "",
     expiryYear: "",
     cvv: "",
-    email: "",
+    amount: "",
+    currency: "USD",
     saveCard: false,
     termsAccepted: false,
   });
@@ -48,6 +47,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
   const [modalMessage, setModalMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(true);
   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const handleMessage = async (event) => {
@@ -101,8 +101,8 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         expmo: paymentData.expiryMonth,
         expyr: paymentData.expiryYear,
         cardholder: paymentData.cardHolder,
-        amount: PAYMENT_AMOUNT,
-        currency: CURRENCY,
+        amount: paymentData.amount,
+        currency: paymentData.currency,
         usdc: "",
         pool: "",
         apikey: API_KEY,
@@ -140,8 +140,8 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         expmo: paymentData.expiryMonth,
         expyr: paymentData.expiryYear,
         cardholder: paymentData.cardHolder,
-        amount: PAYMENT_AMOUNT,
-        currency: CURRENCY,
+        amount: paymentData.amount,
+        currency: paymentData.currency,
         usdc: "",
         pool: "",
         apikey: API_KEY,
@@ -165,6 +165,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
       }
     } catch (error) {
       logError("Error authenticating 3DS", error);
+      console.error("Error authenticating 3DS", error);
       handleOpenModal("3DS Authentication failed. Please try again.");
     }
   }, [transactionReference, paymentData]);
@@ -208,8 +209,8 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         expmo: paymentData.expiryMonth,
         expyr: paymentData.expiryYear,
         cardholder: paymentData.cardHolder,
-        amount: PAYMENT_AMOUNT,
-        currency: CURRENCY,
+        amount: paymentData.amount,
+        currency: paymentData.currency,
         usdc: "",
         pool: "",
         apikey: API_KEY,
@@ -252,8 +253,9 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
       else if (!/^\d{3}$/.test(value)) error = "Invalid CVV (3 digits required)";
     }
 
-    if (name === "email") {
-      if (value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "Invalid email format";
+    if (name === "amount") {
+      if (!value) error = "Payment amount is required";
+      else if (parseFloat(value) <= 0) error = "Amount must be greater than 0";
     }
 
     if (name === "termsAccepted") {
