@@ -81,7 +81,7 @@ const CardDetailsForm = ({
     <Box>
       <PaymentAmount>
         <Grid container columnSpacing={2} width={"100%"}>
-          <Grid item size={8.5}>
+          <Grid item size={8}>
             <TextField
               fullWidth
               required
@@ -103,7 +103,7 @@ const CardDetailsForm = ({
               }}
             />
           </Grid>
-          <Grid item size={3.5}>
+          <Grid item size={4}>
             <FormControl fullWidth>
               <InputLabel id="currency-select-label">Currency</InputLabel>
               <Select
