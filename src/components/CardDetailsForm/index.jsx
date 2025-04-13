@@ -81,7 +81,7 @@ const CardDetailsForm = ({
     <Box>
       <PaymentAmount>
         <Grid container columnSpacing={2} width={"100%"}>
-          <Grid item size={8}>
+          <Grid item size={isMobile ? 7 : 9}>
             <TextField
               fullWidth
               required
@@ -89,7 +89,7 @@ const CardDetailsForm = ({
               error={!!errors.amount}
               helperText={errors.amount}
               onBlur={(e) => validateField("amount", e.target.value)}
-              label="Payment Amount"
+              label={isMobile ? "Amount" : "Payment Amount"}
               value={paymentData.amount || ''}
               onChange={handleAmountChange}
               slotProps={{
@@ -103,7 +103,7 @@ const CardDetailsForm = ({
               }}
             />
           </Grid>
-          <Grid item size={4}>
+          <Grid item size={isMobile ? 5 : 3}>
             <FormControl fullWidth>
               <InputLabel id="currency-select-label">Currency</InputLabel>
               <Select
