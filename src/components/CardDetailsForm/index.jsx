@@ -77,6 +77,7 @@ const CardDetailsForm = ({
 
   const isMobile = useMediaQuery("(max-width:500px)");
 
+  
   return (
     <Box>
       <PaymentAmount>
