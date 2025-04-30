@@ -33,6 +33,7 @@ export const CardWrapper = styled("div")(({ theme }) => ({
   }
 }));
 
+
 export const PaymentAmount = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
