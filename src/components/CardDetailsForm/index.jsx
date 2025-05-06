@@ -82,7 +82,7 @@ const CardDetailsForm = ({
     <Box>
       <PaymentAmount>
         <Grid container columnSpacing={2} width={"100%"}>
-          <Grid item size={isMobile ? 7 : 9}>
+          <Grid item size={isMobile ? 7 : 8}>
             <TextField
               fullWidth
               required
@@ -104,7 +104,7 @@ const CardDetailsForm = ({
               }}
             />
           </Grid>
-          <Grid item size={isMobile ? 5 : 3}>
+          <Grid item size={isMobile ? 5 : 4}>
             <FormControl fullWidth>
               <InputLabel id="currency-select-label">Currency</InputLabel>
               <Select
@@ -115,6 +115,8 @@ const CardDetailsForm = ({
               >
                 <MenuItem value="USD">USD</MenuItem>
                 <MenuItem value="EUR">Euro</MenuItem>
+                <MenuItem value="GBP">Pound</MenuItem>
+                <MenuItem value="PLN">Zloty</MenuItem>
               </Select>
             </FormControl>
           </Grid>

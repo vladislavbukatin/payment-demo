@@ -3,3 +3,4 @@ dist
 eslint.config.mjs
 .eslintrc.json
 .env
+tsconfig.json

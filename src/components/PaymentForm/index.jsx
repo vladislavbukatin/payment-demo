@@ -18,9 +18,9 @@ import PropTypes from 'prop-types';
 import lightLogo from "../../../assets/logo-light.svg";
 import darkLogo from "../../../assets/logo-dark.svg";
 import logError from "../../utils/logger";
+import CurrencyRate from "../CurrencyRate";
 
 const ORDER_ID = "ORDER_ID";
-
 
 const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -290,6 +290,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         <Typography variant="h6" className="payment-title">
           Confirm payment details
         </Typography>
+        <CurrencyRate currency={paymentData.currency} />
         <CardDetailsForm
           paymentData={paymentData}
           errors={errors}

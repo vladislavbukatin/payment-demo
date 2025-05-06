@@ -12,6 +12,7 @@
     "@mui/material": "^7.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.8.4",
+    "dayjs": "^1.11.13",
     "jwt-decode": "^4.0.0",
     "styled-components": "^6.1.16",
     "vite": "^6.2.2"
