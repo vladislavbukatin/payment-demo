@@ -19,14 +19,12 @@ import lightLogo from "../../../assets/logo-light.svg";
 import darkLogo from "../../../assets/logo-dark.svg";
 import logError from "../../utils/logger";
 import CurrencyRate from "../CurrencyRate";
+import { getApiKeyByCustomer } from "../../utils/getCustomerApiKey";
 
 const ORDER_ID = "ORDER_ID";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const CUSTOMER_ID = import.meta.env.VITE_CUSTOMER_ID;
-  
   const [paymentData, setPaymentData] = useState({
     cardNumber: "",
     cardHolder: "",
@@ -47,7 +45,21 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
   const [modalMessage, setModalMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [customerId, setCustomerId] = useState(null);
+  const [modalDisableClose, setModalDisableClose] = useState(false);
+  const apiKey = getApiKeyByCustomer(customerId);
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const customerId = queryParams.get("customerId");
+  
+    if (!customerId) {
+      handleOpenModal("Missing customer ID. Please check the URL.", false, true);
+      return;
+    }
+  
+    setCustomerId(customerId);
+  }, []);
 
   useEffect(() => {
     const handleMessage = async (event) => {
@@ -74,14 +86,16 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
     };
   }, [transactionReference, challengeRef]);
 
-  const handleOpenModal = (message, success = false) => {
+  const handleOpenModal = (message, success = false, disableClose = false) => {
     setModalMessage(message);
     setIsSuccess(success);
     setModalOpen(true);
+    setModalDisableClose(disableClose);
     setLoading(false);
   };
 
   const handleCloseModal = () => {
+    if (modalDisableClose) return;
     setModalOpen(false);
     if (isSuccess) {
       window.location.href = "/";
@@ -92,7 +106,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
     setLoading(true);
     try {
       const payload = {
-        customer: CUSTOMER_ID,
+        customer: customerId,
         co: "al",
         product: "1000",
         productdescription: "IPTV subscription sale",
@@ -105,7 +119,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         currency: paymentData.currency,
         usdc: "",
         pool: "",
-        apikey: API_KEY,
+        apikey: apiKey,
         externalid: ORDER_ID,
         customeremail: paymentData.email,
       };
@@ -131,7 +145,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
       if (!transactionReference) return;
 
       const payload = {
-        customer: CUSTOMER_ID,
+        customer: customerId,
         co: "al",
         product: "1000",
         productdescription: "IPTV subscription sale",
@@ -144,7 +158,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         currency: paymentData.currency,
         usdc: "",
         pool: "",
-        apikey: API_KEY,
+        apikey: apiKey,
         externalid: ORDER_ID,
         customeremail: paymentData.email,
         colref: sessionId,
@@ -177,7 +191,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
       const payload = {
         refid: transactionReference,
         challengeref: challengeRef,
-        customer: CUSTOMER_ID,
+        customer: customerId,
       };
 
       const response = await axios.post(`${API_BASE_URL}/wp3dsverify`, payload, {
@@ -200,7 +214,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
       if (!transactionReference) return;
 
       const payload = {
-        customer: CUSTOMER_ID,
+        customer: customerId,
         co: "al",
         product: "1000",
         productdescription: "IPTV subscription sale",
@@ -213,7 +227,7 @@ const PaymentForm = ({ isDarkMode, setIsDarkMode }) => {
         currency: paymentData.currency,
         usdc: "",
         pool: "",
-        apikey: API_KEY,
+        apikey: apiKey,
         externalid: ORDER_ID,
         customeremail: paymentData.email,
         refid: transactionReference,
